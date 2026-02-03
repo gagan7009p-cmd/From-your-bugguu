@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For My Molle ❤️</title>
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Patrick+Hand&family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
+<style>
+    /* --- PINTEREST VIBE & BACKGROUND --- */
+    body {
+        background: linear-gradient(120deg, #ffdde1 0%, #ee9ca7 100%);
+        background-size: 400% 400%;
+        animation: gradientBG 15s ease infinite;
+        font-family: 'Quicksand', sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        margin: 0;
+        overflow: hidden; /* Prevent scrolling on game screen */
+        user-select: none;
+    }
+
+    @keyframes gradientBG {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+    }
+
+    /* Floating Background Hearts */
+    .bg-heart {
+        position: absolute;
+        color: rgba(255, 255, 255, 0.6);
+        animation: float 8s infinite ease-in-out;
+        z-index: -1;
+    }
+    @keyframes float {
+        0% { transform: translateY(100vh) scale(0.5); opacity: 0; }
+        50% { opacity: 0.8; }
+        100% { transform: translateY(-10vh) scale(1.5); opacity: 0; }
+    }
+
+    /* --- CONTAINERS (CARDS) --- */
+    .screen {
+        background: rgba(255, 255, 255, 0.95);
+        width: 90%;
+        max-width: 450px;
+        border-radius: 35px;
+        padding: 25px;
+        text-align: center;
+        box-shadow: 0 15px 45px rgba(255, 94, 141, 0.4);
+        border: 4px dashed #ff8fa3;
+        position: relative;
+        display: none; /* Hidden by default */
+        max-height: 90vh; /* Ensure it fits on phone screens */
+        overflow-y: auto; /* Allow scrolling inside the card if text is long */
+    }
+
+    /* Show game first */
+    #game-screen { display: block; overflow: hidden; } 
+
+    /* --- TYPOGRAPHY --- */
+    h1 {
+        font-family: 'Dancing Script', cursive;
+        color: #d63384;
+        font-size: 2.5rem;
+        margin-bottom: 5px;
+        margin-top: 0;
+        text-shadow: 2px 2px 0px rgba(255, 230, 250, 1);
+    }
+
+    p { color: #555; font-size: 1rem; margin-bottom: 15px; }
+
+    /* --- GAME ELEMENTS --- */
+    .heart-btn-container { margin: 20px 0; }
+    
+    #heart-btn {
+        font-size: 5.5rem;
+        cursor: pointer;
+        transition: transform 0.1s;
+        filter: drop-shadow(0 5px 10px rgba(255, 0, 0, 0.2));
+        user-select: none;
+    }
+    #heart-btn:active { transform: scale(0.85); }
+
+    .progress-track {
+        background: #ffe6fa;
+        border-radius: 20px;
+        height: 25px;
+        width: 100%;
+        margin-top: 20px;
+        border: 2px solid #ffb3c1;
+        overflow: hidden;
+    }
+
+    .progress-fill {
+        background: linear-gradient(90deg, #ff9a9e 0%, #ff6a88 100%);
+        height: 100%;
+        width: 0%; /* Starts at 0 */
+        border-radius: 20px;
+        transition: width 0.1s;
+    }
+
+    .tap-hint {
+        font-family: 'Patrick Hand', cursive;
+        color: #ff4d6d;
+        font-size: 1.3rem;
+        margin-top: 10px;
+        font-weight: bold;
+    }
+
+    /* --- PASSWORD INPUT --- */
+    input[type="text"] {
+        padding: 12px;
+        border-radius: 50px;
+        border: 2px solid #ff8fa3;
+        width: 70%;
+        outline: none;
+        font-family: 'Quicksand', sans-serif;
+        text-align: center;
+        font-size: 1.1rem;
+        margin-top: 15px;
+        background: #fff0f5;
+        color: #d63384;
+    }
+
+    /* --- LETTER STYLING --- */
+    .cute-gif {
+        width: 100%;
+        max-width: 180px;
+        border-radius: 15px;
+        margin: 10px auto;
+        display: block;
+        border: 3px solid #fff;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+
+    .message-body {
+        font-family: 'Patrick Hand', cursive; /* Handwritten font */
+        color: #4a3b45;
+        font-size: 1.15rem;
+        line-height: 1.4;
+        text-align: left;
+        background: #fff6f9;
+        padding: 15px;
+        border-radius: 20px;
+        margin-top: 10px;
+    }
+
+    .highlight {
+        color: #ff4d6d;
+        font-weight: bold;
+        background-color: #ffe4e9;
+        padding: 2px 4px;
+        border-radius: 6px;
+    }
+
+    .btn {
+        background: #ff4d6d;
+        color: white;
+        padding: 12px 30px;
+        border: none;
+        border-radius: 50px;
+        font-weight: bold;
+        cursor: pointer;
+        margin-top: 15px;
+        box-shadow: 0 5px 15px rgba(255, 77, 109, 0.4);
+        font-size: 1rem;
+    }
+    
+    /* Scrollbar hidden for cleanliness */
+    ::-webkit-scrollbar { width: 0px; background: transparent; }
+
+</style>
+</head>
+<body>
+
+    <div class="bg-heart" style="left:10%; animation-duration:7s; font-size:2rem;">❤️</div>
+    <div class="bg-heart" style="left:80%; animation-duration:9s; font-size:3rem;">💖</div>
+    <div class="bg-heart" style="left:40%; animation-duration:12s; font-size:1.5rem;">🌸</div>
+
+    <div id="game-screen" class="screen">
+        <h1>Love Meter 🎮</h1>
+        <p>Mere layi thoda effort kro!<br>Tap the Heart to fill the Love Tank! 👇</p>
+        
+        <div class="heart-btn-container">
+            <div id="heart-btn" onclick="tapHeart()">❤️</div>
+        </div>
+
+        <div class="progress-track">
+            <div id="progress-fill" class="progress-fill"></div>
+        </div>
+        <p class="tap-hint" id="game-text">Start Tapping! 🥺</p>
+    </div>
+
+    <div id="password-screen" class="screen">
+        <h1>Bas 1 Step Hor... 🔐</h1>
+        <img src="https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExMDV4eG80eGZ6eGZ6eGZ6eGZ6eGZ6eGZ6eGZ6eGZ6eGZ6eCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/iCVzZwwE6QNBz3ZFh8/giphy.gif" class="cute-gif">
+        <p>Hun "Magic Word" type kro! (Hint: Your nickname)</p>
+        
+        <input type="text" id="passwordInput" placeholder="Password here...">
+        <div id="error-msg" style="color:red; display:none; margin-top:5px; font-weight:bold;">Galat hai! 🥺 Try 'molle'</div>
+        <br>
+        <button class="btn" onclick="checkPassword()">Unlock Letter 💌</button>
+    </div>
+
+    <div id="letter-screen" class="screen">
+        <h1>Suno mere pyare laddo ❤️</h1>
+        <img src="https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExbnY3aXFqanE2a3I4aG4wZzV6aG4wZzV6aG4wZzV6aG4wZyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/Mnt00E9zIKB7CPxrww/giphy.gif" class="cute-gif">
+        
+        <div class="message-body">
+            <p>
+                Mannya ki sade ch kuch mood off wali gallan ya negative gallan hundia a but isda mtlb eh ni ki we don’t understand or don’t feel each other’s feelings. 🥺
+            </p>
+            <p>
+                Dekho mere bache chahe hum me kitni mood off wali baate ya negative baate ho at the end what matters is ki how much we love each other mere kake and <span class="highlight">we love each other soooooooo infinitely wala</span> 😁🫵🫀💖🧿❤️🫶😚💗✨
+            </p>
+            <p>
+                Soo myy sweetheart this is for an apology my kakku ki main negative sochleta hu faltu ch and maine wo baat boldi ki express krna ab itna matter ni krta wagera i am sorry for that mere bache but sohne hum me sab bohot matter krta hai jaan <span class="highlight">each and every small thing matters myy love thats why our relationship is bestest my sweetheart</span> 😁❤️🧿💞💗💖 and ye express wali baat chhodo mera bache sab baate chhodte hai because you know na these negative things don’t matter between us my lovee 😁❤️🧿💖🫶💞
+            </p>
+            <p>
+                Ab pehle mera kakka ispe react krega ki mere bache ko acha feel hua ? 😁❤️🧿💞💖😚💗✨ and fir mera bacha btayega ki sab clear hai na and all good hai na 😁❤️🧿💞💗💖 if mera kakka mujhse naraz hai to main mnauga mere bache ko and mood happy krege mere sohne darling 😁❤️🧿💞💗💖
+            </p>
+            <p>
+                I feel sorry for that mere bachee and i loveee youu sooooo much myy darlinggg , myy loveee , my heart, my breath <span class="highlight">meri molle</span> 🫵🫀😁❤️🧿💞✨😚💖💗
+            </p>
+            <p>
+                Bas ye apke buggu ki taraf se random chotu sa effort i mean main ise effort ni count krta because itna to main mere bachuu ke liye kr hi skta hu na ! 😁❤️🧿💞😚💖💗✨ bas ye meri taraf se mere kakke ke liye chotu sa but cuutuu sa para ya gift kuch bhi bol skte hai 😁❤️🧿💞✨💖😚
+            </p>
+        </div>
+
+        <img src="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExaHk0aXFqanE2a3I4aG4wZzV6aG4wZzV6aG4wZzV6aG4wZzV6aG4wZyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/LmgHqqB3GXjET5c9j4/giphy.gif" class="cute-gif">
+        
+        <p style="font-family:'Patrick Hand'; color:#d63384; font-size:1.1rem; margin-top:10px;">
+            I loveeee youu forever meri molle... ❤️
+        </p>
+
+        <button class="btn" onclick="alert('Love You Forever Meri Jaan! ❤️')">I Love You! 💖</button>
+        <br><br>
+    </div>
+
+<script>
+    // --- VARIABLES ---
+    let progress = 0;
+    const heartBtn = document.getElementById("heart-btn");
+    const bar = document.getElementById("progress-fill");
+    const gameText = document.getElementById("game-text");
+    const gameScreen = document.getElementById("game-screen");
+    const passwordScreen = document.getElementById("password-screen");
+    const letterScreen = document.getElementById("letter-screen");
+
+    // --- GAME FUNCTION ---
+    function tapHeart() {
+        if (progress < 100) {
+            progress += 6; // Speed of filling
+            if(progress > 100) progress = 100;
+            
+            bar.style.width = progress + "%";
+            
+            // Animation for heart beat
+            heartBtn.style.transform = "scale(0.8)";
+            setTimeout(() => heartBtn.style.transform = "scale(1)", 100);
+
+            // Dynamic text
+            if (progress > 20) gameText.innerText = "Thoda hor zor lagao! 🥰";
+            if (progress > 50) gameText.innerText = "Haaye kina love krde o! 💖";
+            if (progress > 80) gameText.innerText = "Bas thoda jeha hor! 🔓";
+            
+            if (progress === 100) {
+                gameText.innerText = "UNLOCKED! 🎉";
+                setTimeout(() => {
+                    gameScreen.style.display = "none";
+                    passwordScreen.style.display = "block";
+                }, 800);
+            }
+        }
+    }
+
+    // --- PASSWORD FUNCTION ---
+    function checkPassword() {
+        const input = document.getElementById("passwordInput").value.toLowerCase().trim();
+        const error = document.getElementById("error-msg");
+        
+        // CHECKING PASSWORD "molle"
+        if (input === "molle") {
+            passwordScreen.style.display = "none";
+            letterScreen.style.display = "block";
+            startRainingHearts(); // Trigger celebration
+        } else {
+            error.style.display = "block";
+            // Shake effect
+            const inputField = document.getElementById("passwordInput");
+            inputField.style.transform = "translateX(10px)";
+            setTimeout(() => inputField.style.transform = "translateX(-10px)", 100);
+            setTimeout(() => inputField.style.transform = "translateX(0px)", 200);
+        }
+    }
+
+    // --- HEART RAIN EFFECT ---
+    function startRainingHearts() {
+        setInterval(() => {
+            const heart = document.createElement('div');
+            heart.innerText = "❤️";
+            heart.style.position = "fixed";
+            heart.style.left = Math.random() * 100 + "vw";
+            heart.style.top = "-5vh";
+            heart.style.fontSize = Math.random() * 20 + 20 + "px";
+            heart.style.animation = "fall 3s linear";
+            heart.style.zIndex = "999";
+            document.body.appendChild(heart);
+            setTimeout(() => heart.remove(), 3000);
+        }, 300);
+    }
+
+    // CSS for rain injected via JS
+    const style = document.createElement('style');
+    style.innerHTML = `@keyframes fall { to { transform: translateY(105vh) rotate(360deg); } }`;
+    document.head.appendChild(style);
+
+</script>
+</body>
+</html>
